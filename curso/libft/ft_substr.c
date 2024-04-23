@@ -6,7 +6,7 @@
 /*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 18:27:16 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/04/22 16:36:17 by pde-jesu         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:31:18 by pde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	return (NULL);
 }
-
+/*
 int main()
 {
     const char *s = "bolas pesadas k bolinhas";
@@ -48,4 +48,4 @@ int main()
     char *ptr = ft_substr(s, start, 25);
     printf("%s", ptr);
     free (ptr);
-}
+}*/

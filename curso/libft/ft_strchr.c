@@ -6,7 +6,7 @@
 /*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:02:22 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/04/11 00:22:00 by pde-jesu         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:20:45 by pde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strchr(const char *s, int c)
 
 	i = 0;
 	if (*s == '\0')
-		return NULL;
+		return (NULL);
 	while (s[i] != '\0')
 	{
 		if (s[i] == (char)c)

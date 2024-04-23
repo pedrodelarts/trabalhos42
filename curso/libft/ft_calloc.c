@@ -6,13 +6,13 @@
 /*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 23:49:57 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/04/19 00:11:05 by pde-jesu         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:04:04 by pde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void *calloc(size_t nmemb, size_t size)
+void *ft_calloc(size_t nmemb, size_t size)
 {
     void *ptr;
 
