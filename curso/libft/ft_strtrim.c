@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 16:07:24 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/04/23 18:26:15 by pde-jesu         ###   ########.fr       */
+/*   Updated: 2024/04/26 14:19:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	return (ptr);
 }
 
+/*
 int	main(void)
 {
 	char *set = "a";
@@ -50,4 +51,4 @@ int	main(void)
 
 	printf("%s", ptr);
 	free(ptr);
-}
+}*/
