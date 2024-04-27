@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 16:07:24 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/04/26 14:19:44 by marvin           ###   ########.fr       */
+/*   Created: 2024/04/27 17:04:20 by pde-jesu          #+#    #+#             */
+/*   Updated: 2024/04/27 17:04:31 by pde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int     set_verify(const char c, const char *set)
+static int	set_verify(const char c, const char *set)
 {
 	int	i;
 
@@ -21,7 +21,7 @@ static int     set_verify(const char c, const char *set)
 	{
 		if (set[i] == c)
 			return (1);
-        i++;
+		i++;
 	}
 	return (0);
 }

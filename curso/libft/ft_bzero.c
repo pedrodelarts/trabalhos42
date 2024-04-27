@@ -6,13 +6,13 @@
 /*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:37:11 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/04/20 17:48:25 by pde-jesu         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:04:13 by pde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_bzero(void *s, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
-    ft_memset(s, 0, n);
+	ft_memset(s, 0, n);
 }

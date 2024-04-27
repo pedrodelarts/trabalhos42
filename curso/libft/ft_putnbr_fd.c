@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/27 17:09:54 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/04/27 17:55:54 by pde-jesu         ###   ########.fr       */
+/*   Created: 2024/04/27 18:19:25 by pde-jesu          #+#    #+#             */
+/*   Updated: 2024/04/27 19:15:39 by pde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+static void	ft_write(char c, int fd)
 {
-	int		i;
-	
-	i = -1;
-	while (s[++i])
-		f(i, &s[i]);
-    return;
+	write(fd, &c, 1);
 }
 
-// void test_function(unsigned int i, char *c)
-// {
-//     c = "L";
-//     printf("index %u is now a %c\n", i, *c);
-// }
-
-// int main()
-// {
-//     char test_string[] = "bolas pesadas";
-//     ft_striteri(test_string, &test_function);
-//     return 0;
-// }
+void ft_putnbr_fd(int n, int fd)
+{
+	if (n == -2147483648)
+	{
+		ft_write('-', fd);
+		ft_write('2', fd);
+		ft_putnbr(147483648, fd);
+	}
+	else if (n < 0)
+	{
+		ft_write('-', fd);
+		n = -n;
+		ft_putnbr(n, fd);
+	}
+	else if (n > 9)
+	{
+		ft_putnbr(n / 10, fd);
+		ft_putnbr(n % 10, fd);
+	}
+	else
+		ft_write(n + 48, fd);
+}
