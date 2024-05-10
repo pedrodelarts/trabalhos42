@@ -6,7 +6,7 @@
 /*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 22:41:13 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/04/29 16:46:20 by pde-jesu         ###   ########.fr       */
+/*   Updated: 2024/05/10 11:45:29 by pde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,25 @@
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	int		i;
-	char	*s1;
-	char	*s2;
+	const unsigned char	*s1;
+	unsigned char		*s2;
 
 	if (!dest || !src)
 		return (NULL);
-	s1 = (char *)src;
-	s2 = (char *)dest;
+	s1 = (const unsigned char *)src;
+	s2 = (unsigned char *)dest;
 	if (dest > src)
 	{
-		i = (int)(n);
-		while (i >= 0)
-		{
-			s2[i] = s1[i];
-			i--;
-		}
+		while (n-- > 0)
+			s2[n] = s1[n];
 	}
 	else
 		ft_memcpy(dest, src, n);
 	return (dest);
 }
 
-int		main(int argc, const char *argv[])
+/*
+int	main(int argc, const char *argv[])
 {
 	char	src[] = "lorem ipsum dolor sit amet";
 	char	*dest;
@@ -77,4 +73,4 @@ int		main(int argc, const char *argv[])
 		write(1, dest, 22);
 	}
 	return (0);
-}
+}*/

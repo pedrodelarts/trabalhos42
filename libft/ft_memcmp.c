@@ -6,7 +6,7 @@
 /*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 18:11:34 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/04/29 15:58:24 by pde-jesu         ###   ########.fr       */
+/*   Updated: 2024/05/10 11:49:53 by pde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t	i;
-	char	*s1temp;
-	char	*s2temp;
+	size_t				i;
+	const unsigned char	*s1temp;
+	const unsigned char	*s2temp;
 
-	s1temp = (char *)s1;
-	s2temp = (char *)s2;
+	s1temp = (const unsigned char *)s1;
+	s2temp = (const unsigned char *)s2;
 	i = 0;
-	while (s1temp[i] != '\0' && s2temp[i] != '\0' && i < n)
+	while ((s1temp[i] != '\0' || s2temp[i] != '\0') && i < n)
 	{
 		if (s1temp[i] > s2temp[i])
 			return (1);

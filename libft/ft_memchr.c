@@ -6,7 +6,7 @@
 /*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 18:41:20 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/04/29 15:58:28 by pde-jesu         ###   ########.fr       */
+/*   Updated: 2024/05/10 11:48:06 by pde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int				i;
-	unsigned char	*str;
+	int					i;
+	const unsigned char	*str;
 
 	i = 0;
-	str = (unsigned char *)s;
+	str = (const unsigned char *)s;
 	if (*str == '\0')
 		return (NULL);
 	while (i < (int)n)
@@ -27,7 +27,6 @@ void	*ft_memchr(const void *s, int c, size_t n)
 			return ((void *)(str + i));
 		i++;
 	}
-	printf("here");
 	return (NULL);
 }
 

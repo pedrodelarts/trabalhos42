@@ -6,7 +6,7 @@
 /*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 18:27:16 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/04/29 16:01:38 by pde-jesu         ###   ########.fr       */
+/*   Updated: 2024/05/10 12:28:12 by pde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	j;
 	char	*ptr;
 
+	if (!s)
+		return (NULL);
+	if (ft_strlen(s) < start)
+		return (ft_strdup(""));
 	ptr = (char *)malloc((len + 1) * (sizeof(char)));
 	if (!ptr)
 		return (NULL);
@@ -28,11 +32,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		if ((unsigned int)i == start)
 		{
 			while (s[i] != '\0' && j < len)
-			{
-				ptr[j] = s[i];
-				j++;
-				i++;
-			}
+				ptr[j++] = s[i++];
 			ptr[j] = '\0';
 			return (ptr);
 		}
