@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:47:35 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/04/29 16:24:32 by pde-jesu         ###   ########.fr       */
+/*   Updated: 2024/05/09 15:36:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,11 @@
 
 void ft_lstadd_back(t_list **lst, t_list *new)
 {
-    
+    t_list *temp;
+
+    temp = ft_lstlast(*lst);
+    if(!temp)
+        *lst = new;
+    else
+        temp->next = new;
 }
