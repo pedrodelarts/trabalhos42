@@ -6,7 +6,7 @@
 /*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 18:13:49 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/04/29 16:19:09 by pde-jesu         ###   ########.fr       */
+/*   Updated: 2024/05/13 17:42:54 by pde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	write(fd, &s, ft_strlen(s));
+	write(fd, s, ft_strlen(s));
 }
