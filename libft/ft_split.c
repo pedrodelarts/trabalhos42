@@ -6,7 +6,7 @@
 /*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:48:31 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/04/27 17:10:30 by pde-jesu         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:51:30 by pde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,19 @@ static int	ft_wordcount(const char *s, char c)
 	return (words);
 }
 
+static void	ft_freesplit(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	int		i;
@@ -54,6 +67,11 @@ char	**ft_split(char const *s, char c)
 			while (s[i] != '\0' && s[i] != c && ++wordlen)
 				i++;
 			arstr[j++] = ft_substr(s, i - wordlen, wordlen);
+			if (!arstr[j - 1])
+			{
+				ft_freesplit(arstr);
+				return (NULL);
+			}
 		}
 		else
 			i++;
