@@ -6,7 +6,7 @@
 /*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:02:22 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/05/10 12:05:30 by pde-jesu         ###   ########.fr       */
+/*   Updated: 2024/05/19 17:22:24 by pde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strchr(const char *s, int c)
 	unsigned int	i;
 	unsigned char	cc;
 
-	cc = (char)c;
+	cc = (unsigned char)c;
 	i = 0;
 	while (s[i] != '\0')
 	{

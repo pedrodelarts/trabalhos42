@@ -6,7 +6,7 @@
 /*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:48:31 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/05/20 15:51:30 by pde-jesu         ###   ########.fr       */
+/*   Updated: 2024/05/22 14:53:44 by pde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,9 @@ static void	ft_freesplit(char **split)
 	free(split);
 }
 
-char	**ft_split(char const *s, char c)
+static char	**ft_spliter(char const *s, char c, int i, int j, int wordlen,
+		char **arstr)
 {
-	int		i;
-	int		j;
-	int		wordlen;
-	char	**arstr;
-
-	if (!s)
-		return (NULL);
-	if (!(arstr = (char **)malloc((ft_wordcount(s, c) + 1) * sizeof(char *))))
-		return (NULL);
 	i = 0;
 	j = 0;
 	while (s[i] != '\0')
@@ -77,6 +69,24 @@ char	**ft_split(char const *s, char c)
 			i++;
 	}
 	arstr[j] = NULL;
+	return (arstr);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	int		i;
+	int		j;
+	int		wordlen;
+	char	**arstr;
+
+	i = 0;
+	j = 0;
+	wordlen = 0;
+	if (!s)
+		return (NULL);
+	if (!(arstr = (char **)malloc((ft_wordcount(s, c) + 1) * sizeof(char *))))
+		return (NULL);
+	ft_spliter(s, c, i, j, wordlen, arstr);
 	return (arstr);
 }
 
