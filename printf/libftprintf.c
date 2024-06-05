@@ -16,10 +16,20 @@ void    ft_printtype(va_list va, size_t *counter, char type)
 {
     if (type == 'c')
         ft_putchar(va_arg(va, int), counter);
-    if (type == 's')
+    else if (type == 's')
         ft_putstr(va_arg(va, char *), counter);
-    // if (type == 'p')
-    //     ft_putptr(va_arg(va, void *), counter);
+    else if (type == 'd' || type == 'i')
+        ft_putnbr_base(va_arg(va, long long), "0123456789", counter);
+    else if (type == 'u')
+        ft_putnbr_base(va_arg(va, unsigned long long), "0123456789", counter);
+    else if (type == 'x')
+        ft_putnbr_base(va_arg(va, long long), "0123456789abcdef", counter);
+    else if (type == 'X')
+		ft_putnbr_base(va_arg(va, long long), "0123456789ABCDEF", counter);
+    else if (type == 'p')
+    	ft_putptr(va, counter);
+	else if (type == '%')
+		ft_putchar('%', counter);
 }
 
 int ft_printf(const char *s, ...)
@@ -49,7 +59,8 @@ int ft_printf(const char *s, ...)
 
 int main()
 {
-    char *a = "a";
-    printf("%d", printf("%p", a));
+    printf("%d\n", ft_printf("%%\n"));
+    printf("%d\n", printf("%%\n"));
+
     // printf("%d", ft_printf("cb%sbc", a));
 }

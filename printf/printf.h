@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 14:34:47 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/06/04 23:26:47 by marvin           ###   ########.fr       */
+/*   Updated: 2024/06/05 15:20:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,8 @@
 
 void	ft_putchar(int c, size_t *counter);
 void	ft_putstr(char *s, size_t *counter);
+void    ft_putnbr_base(long long n, char *base, size_t *counter);
+void    ft_putptr(va_list args, size_t *counter);
+void    ft_ptr(unsigned long long n, char *base, size_t *counter);
 
 #endif
