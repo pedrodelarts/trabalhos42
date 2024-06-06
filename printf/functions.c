@@ -3,58 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   functions.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/04 22:01:20 by marvin            #+#    #+#             */
-/*   Updated: 2024/06/04 22:01:20 by marvin           ###   ########.fr       */
+/*   Created: 2024/06/06 13:33:52 by pde-jesu          #+#    #+#             */
+/*   Updated: 2024/06/06 16:42:54 by pde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int ft_strlen(char *str)
+void	ft_putnbr_base(long long n, char *base, size_t *counter)
 {
-	int i;
+	long long	i;
+	long long	baselen;
+	int			n2[50];
 
 	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-void	ft_putchar(int c, size_t *counter)
-{
-	write(1, &c, 1);
-	(*counter)++;
-}
-
-void	ft_putstr(char *s, size_t *counter)
-{
-	int i;
-
-	i = 0;
-	if (s[0] == '\0')
-		return ;
-	while (s[i])
-	{
-		ft_putchar(s[i], counter);
-		i++;
-	}
-}
-
-void ft_putnbr_base(long long n, char *base, size_t *counter)
-{
-	int i;
-	int baselen;
-	long long n2[50];
-
-	i = 0;
-	baselen = ft_strlen(base);
-
+	baselen = (long long)ft_strlen(base);
 	if (n < 0)
 	{
-		ft_putchar('-', counter);
 		n = -n;
+		ft_putchar('-', counter);
+	}
+	if (n == 0)
+	{
+		ft_putchar('0', counter);
+		return ;
 	}
 	while (n)
 	{
@@ -66,12 +40,12 @@ void ft_putnbr_base(long long n, char *base, size_t *counter)
 		ft_putchar(base[n2[i]], counter);
 }
 
-void ft_ptr(unsigned long long n, char *base, size_t *counter)
+void	ft_ptr(unsigned long long n, char *base, size_t *counter)
 {
-	int i;
-	int baselen;
-	long long n2[50];
-	
+	int			i;
+	int			baselen;
+	long long	n2[50];
+
 	i = 0;
 	baselen = ft_strlen(base);
 	while (n)
@@ -84,11 +58,16 @@ void ft_ptr(unsigned long long n, char *base, size_t *counter)
 		ft_putchar(base[n2[i]], counter);
 }
 
-void    ft_putptr(va_list args, size_t *counter)
+void	ft_putptr(va_list va, size_t *counter)
 {
-    unsigned long long	ptr;
+	void	*ptr;
 
-    ptr = va_arg(args, unsigned long long);
-    ft_putstr("0x", counter);
-    ft_ptr(ptr, "0123456789abcdef", counter);
+	ptr = va_arg(va, void *);
+	if (ptr == NULL)
+	{
+		ft_putstr("(nil)", counter);
+		return ;
+	}
+	ft_putstr("0x", counter);
+	ft_ptr((unsigned long long)ptr, "0123456789abcdef", counter);
 }
