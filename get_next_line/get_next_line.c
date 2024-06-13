@@ -6,7 +6,7 @@
 /*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 19:24:55 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/06/11 18:56:31 by pde-jesu         ###   ########.fr       */
+/*   Updated: 2024/06/13 20:55:43 by pde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 char *get_line(char *buffer, int fd)
 {
 	int bytes;
-	static char *temp_buffer;
+	char *temp_buffer;
 
-	bytes = 0;
-    temp_buffer = (char *)malloc((1 + 1) * sizeof(char));
-    while (bytes >= 0)
+	bytes = 1;
+	buffer = (char *)malloc(1 * sizeof(char));
+    temp_buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+    while (bytes > 0)
     {
-        bytes = read(fd, temp_buffer, 1);
+        bytes = read(fd, temp_buffer, BUFFER_SIZE);
+		temp_buffer[bytes] = '\0';
 		buffer = ft_strjoin(buffer, temp_buffer);
-		if (buffer[ft_strlen(buffer)] == '\n')
-			break;
+		if (ft_strchr(temp_buffer, '\n'))
+			break ;
     }
 	free (temp_buffer);
 	return(buffer);
@@ -34,7 +36,9 @@ char *get_line(char *buffer, int fd)
 char *get_next_line(int fd)
 {
 	static char *buffer;
-	
+	int i;
+
+	i = 0;
 	buffer = get_line(buffer, fd);
 	return(buffer);
 }
