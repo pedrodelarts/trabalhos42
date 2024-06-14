@@ -6,63 +6,78 @@
 /*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 16:50:00 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/06/13 20:55:54 by pde-jesu         ###   ########.fr       */
+/*   Updated: 2024/06/14 17:23:36 by pde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(char *s)
+size_t	ft_strlen(const char *s)
 {
 	int	i;
 
 	i = 0;
-	while (s[i] != '\n')
+	while (s[i] != '\0')
 		i++;
 	return (i);
 }
 
-char	*ft_strjoin(char *buffer1, char *buffer2)
+char	*ft_strjoin(const char *buffer1, const char *buffer2)
 {
 	char	*ptr;
 	int		i;
 	int		j;
+	int		totalsize;
 
-	ptr = (char *)malloc((ft_strlen(buffer1) + ft_strlen(buffer2) + 1)
-			* sizeof(char));
+	totalsize = (ft_strlen(buffer1) + ft_strlen(buffer2));
+	ptr = (char *)malloc((totalsize + 1) * sizeof(char));
+	if (!ptr || !buffer1 || !buffer2)
+		return (NULL);
 	i = -1;
 	j = -1;
 	while (buffer1[++i] != '\0')
 		ptr[i] = buffer1[i];
 	while (buffer2[++j] != '\0')
 		ptr[i + j] = buffer2[j];
-	ptr[i + j] = '\0';
-	free(buffer1);
+	ptr[i + j] = 0;
 	return (ptr);
 }
 
-char	*ft_strchr(const char *string, int searchedChar )
+void	ft_bzero(void *s, size_t n)
 {
 	char	*str;
+	size_t	i;
 
-	str = (char *)string;
-	while (*str != searchedChar && *str != 0)
-		str++;
-	if (*str == searchedChar)
-		return (str);
-	else
-		return (NULL);
+	str = (char *)s;
+	i = 0;
+	while (i < n)
+	{
+		str[i] = '\0';
+		i++;
+	}
 }
-// int	ft_find_newline(char *buffer)
-// {
-// 	int i;
 
-// 	i = 0;
-// 	while (buffer[i])
-// 	{
-// 		if (buffer[i] == '\n')
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
+void	*ft_calloc(size_t elementCount, size_t elementSize)
+{
+	char	*res;
+
+	res = malloc(elementSize * elementCount);
+	if (!res)
+		return (NULL);
+	ft_bzero(res, elementSize * elementCount);
+	return (res);
+}
+
+int	ft_find_newline(char *buffer)
+{
+	int	i;
+
+	i = 0;
+	while (buffer[i])
+	{
+		if (buffer[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
