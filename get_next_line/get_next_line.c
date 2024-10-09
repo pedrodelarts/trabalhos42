@@ -1,72 +1,41 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 19:24:55 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/06/14 17:21:31 by pde-jesu         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line.h"
-
-char	*buffer_free(char *buffer, char *temp_buffer)
-{
-	char	*new_buffer;
-
-	new_buffer = ft_strjoin(buffer, temp_buffer);
-	free(buffer);
-	return (new_buffer);
-}
-
-char	*get_line(int fd, char *buffer)
-{
-	int		bytes;
-	char	*temp_buffer;
-
-	bytes = 1;
-	if (!buffer)
-		buffer = ft_calloc(1, 1);
-	temp_buffer = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
-	while (bytes > 0)
-	{
-		bytes = read(fd, temp_buffer, BUFFER_SIZE);
-		if (bytes == -1)
-		{
-			free(temp_buffer);
-			return (NULL);
-		}
-		temp_buffer[bytes] = 0;
-		buffer = buffer_free(buffer, temp_buffer);
-		if (ft_find_newline(temp_buffer))
-			break ;
-	}
-	free(temp_buffer);
-	return (buffer);
-}
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
-	int			i;
+	static char	tempbuf[BUFFER_SIZE];
+	int			res;
+	int			check;
+	char		*line;
 
-	i = 0;
-	buffer = get_line(fd, buffer);
-	if (!buffer)
-		return (NULL);
-	return (buffer);
+	check = 0;
+	res = 0;
+	line = NULL;
+	while (BUFFER_SIZE > 0 && fd >= 0)
+	{
+		if (*tempbuf)
+			line = ft_count(tempbuf, &check, line);
+		if (tempbuf[0] == '\0' && check == 0)
+		{
+			res = read(fd, tempbuf, BUFFER_SIZE);
+			if (res < 0)
+				ft_clean(tempbuf, &check, 1);
+			if ((res <= 0 && !line) || res < 0)
+				return (ft_clean(line, &check, res));
+			tempbuf[res] = '\0';
+		}
+		if ((line && check == 1) || (tempbuf[0] == '\0' && res == 0))
+			return (line);
+	}
+	return (NULL);
 }
 
-int	main(void)
+/* int	main(void)
 {
-	int		fd;
-	char	*buffer;
+	int fd = open("test.txt", O_RDWR);
 
-	fd = open("textfile.txt", O_RDONLY);
-	buffer = get_next_line(fd);
-	close(fd);
-	printf("%s", buffer);
-	free(buffer);
-}
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+} */

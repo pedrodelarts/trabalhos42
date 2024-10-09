@@ -3,81 +3,86 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pde-jesu <pde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaleixo- <aaleixo-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/11 16:50:00 by pde-jesu          #+#    #+#             */
-/*   Updated: 2024/06/14 17:23:36 by pde-jesu         ###   ########.fr       */
+/*   Created: 2024/09/09 13:53:35 by aaleixo-          #+#    #+#             */
+/*   Updated: 2024/09/09 15:11:11 by aaleixo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_count_word(char *s)
 {
-	int	i;
+	int	len;
 
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
+	len = 0;
+	while (s && s[len])
+	{
+		if (s[len] == '\n')
+			return (len + 1);
+		len++;
+	}
+	return (len);
 }
 
-char	*ft_strjoin(const char *buffer1, const char *buffer2)
+void	*ft_clean(char *buf, int *newline, int funct)
 {
-	char	*ptr;
-	int		i;
-	int		j;
-	int		totalsize;
-
-	totalsize = (ft_strlen(buffer1) + ft_strlen(buffer2));
-	ptr = (char *)malloc((totalsize + 1) * sizeof(char));
-	if (!ptr || !buffer1 || !buffer2)
-		return (NULL);
-	i = -1;
-	j = -1;
-	while (buffer1[++i] != '\0')
-		ptr[i] = buffer1[i];
-	while (buffer2[++j] != '\0')
-		ptr[i + j] = buffer2[j];
-	ptr[i + j] = 0;
-	return (ptr);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	char	*str;
 	size_t	i;
+	size_t	j;
 
-	str = (char *)s;
 	i = 0;
-	while (i < n)
+	j = 0;
+	*newline = 0;
+	if (funct <= 0)
 	{
-		str[i] = '\0';
-		i++;
-	}
-}
-
-void	*ft_calloc(size_t elementCount, size_t elementSize)
-{
-	char	*res;
-
-	res = malloc(elementSize * elementCount);
-	if (!res)
+		free(buf);
 		return (NULL);
-	ft_bzero(res, elementSize * elementCount);
-	return (res);
-}
-
-int	ft_find_newline(char *buffer)
-{
-	int	i;
-
-	i = 0;
-	while (buffer[i])
+	}
+	while (i < BUFFER_SIZE && buf[i] != '\0')
 	{
-		if (buffer[i] == '\n')
-			return (1);
+		if (*newline == 1 && funct == 2)
+			buf[j++] = buf[i];
+		if (buf[i] == '\n' && funct == 2)
+			*newline = 1;
+		buf[i] = 0;
 		i++;
 	}
-	return (0);
+	return (NULL);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*s3;
+	size_t	i;
+	size_t	j;
+	size_t	len1;
+	size_t	len2;
+
+	len1 = ft_count_word(s1);
+	len2 = ft_count_word(s2);
+	s3 = (char *)malloc(len1 + len2 + 1);
+	if (!s3)
+		return (s1);
+	i = -1;
+	while (++i < len1)
+		s3[i] = s1[i];
+	j = 0;
+	while (j < len2)
+	{
+		s3[i + j] = s2[j];
+		j++;
+	}
+	s3[i + j] = '\0';
+	free(s1);
+	return (s3);
+}
+
+char	*ft_count(char *buf, int *newline, char *line)
+{
+	line = ft_strjoin(line, buf);
+	if (!line)
+		return (NULL);
+	ft_clean(buf, newline, 2);
+	return (line);
 }
